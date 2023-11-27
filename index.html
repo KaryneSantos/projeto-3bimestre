@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <h1>Manipulação de DOM</h1>
+    <p id="demo">Bem-vindo ao Coding Dojo!</p>
+    <button id="changeText">Alterar Texto</button>
+    <ul id="lista"></ul>
+    <input type="text" id="input">
+    <button id="adicionar">Adicionar</button>
+    <button id="remover">Remover</button>
+    <script>
+        const button = document.getElementById("changeText");
+let texto = document.getElementById("demo");
+let titulo = document.querySelector("h1")
+let adicionarb = document.getElementById("adicionar")
+let removerb = document.getElementById("remover")
+let input = document.getElementById("input")
+let ul = document.getElementById("lista")
+let li = []
+
+button.addEventListener('click', () => {
+    texto.textContent = "Botao funcionando!!"
+});
+
+titulo.addEventListener("mouseover", () => {
+    titulo.style.color = "#FF0000";
+})
+
+titulo.addEventListener("mouseout", () => {
+    titulo.style.color = "black"
+})
+
+adicionarb.addEventListener("click", () =>{
+     ul.innerHTML = `<li>${input.value}</li>`;
+   li.forEach(texto,index => {
+    console.log(`O item ${index} é: ${texto}`);
+   })
+   
+} )
+    </script>
+</body>
+</html>
