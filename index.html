@@ -1,49 +1,124 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        div{
+            justify-content: center;
+            text-align: center;
+            margin-top: 100px;
+            padding-top: 100px;
+        }
+        button{
+            height: 30px;
+            width: 100px;
+            border-radius: 3px;
+            border: 1px solid lightblue;
+            background-color:lightblue;
+        }
+        input{
+            height: 30px;
+            width: 250px;
+            font-size: 18px;
+            border-radius: 3px;
+        }
+
+        ul{
+            list-style-type: none;
+            margin: 20px;
+            padding: 0; 
+        }
+        li {
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 10px;
+        }
+        #changeText{
+            margin: 10px;
+        }
+        input[type="checkbox"]{
+            margin-right: 10px;
+        }
+    </style>
 </head>
+
 <body>
+    <div>
     <h1>Manipulação de DOM</h1>
     <p id="demo">Bem-vindo ao Coding Dojo!</p>
     <button id="changeText">Alterar Texto</button>
-    <ul id="lista"></ul>
-    <input type="text" id="input">
+    <br><br>
+    <input type="text" id="input" >
+    <input type="date" id="data" >
     <button id="adicionar">Adicionar</button>
     <button id="remover">Remover</button>
+</div>
+    <ul id="lista"></ul>
+   
     <script>
         const button = document.getElementById("changeText");
-let texto = document.getElementById("demo");
-let titulo = document.querySelector("h1")
-let adicionarb = document.getElementById("adicionar")
-let removerb = document.getElementById("remover")
-let input = document.getElementById("input")
-let ul = document.getElementById("lista")
-let li = []
+        let texto = document.getElementById("demo");
+        let titulo = document.querySelector("h1")
+        let adicionarb = document.getElementById("adicionar")
+        let removerb = document.getElementById("remover")
+        let input = document.getElementById("input")
+        let ul = document.getElementById("lista")
+        let data = document.getElementById("data");
+        let check = document.getElementById("check");
+        let li = []
 
-button.addEventListener('click', () => {
-    texto.textContent = "Botao funcionando!!"
-});
+        button.addEventListener('click', () => {
+            texto.textContent = "Botao funcionando!!"
+        });
 
-titulo.addEventListener("mouseover", () => {
-    titulo.style.color = "#FF0000";
-})
+        titulo.addEventListener("mouseover", () => {
+            titulo.style.color = "#FF0000";
+        })
 
-titulo.addEventListener("mouseout", () => {
-    titulo.style.color = "black"
-})
+        titulo.addEventListener("mouseout", () => {
+            titulo.style.color = "black"
+        })
 
-adicionarb.addEventListener("click", () =>{
-     ul.innerHTML = `<li>${input.value}</li>`;
-   li.forEach(texto,index => {
-    console.log(`O item ${index} é: ${texto}`);
-   })
-   
-} )
+
+        adicionarb.addEventListener("click", () => {
+            if(input.value.trim()!=""){
+                if(data.value.trim()!=""){
+                    const novoItem = document.createElement("li");
+                    let check = document.createElement("input");
+                    check.type = "checkbox";
+                    check.addEventListener("change", function () {
+                        novoItem.style.textDecoration = this.checked ? "line-through" : "none";
+                        if (this.checked) {
+                            ul.appendChild(novoItem);
+                        } else {
+                            ul.prepend(novoItem);
+                        }
+                    });
+                    const dataSelecionada = document.getElementById("data").value;
+                    novoItem.textContent = `${dataSelecionada}: ${input.value}`;
+                    novoItem.appendChild(check); 
+                    ul.prepend(novoItem);
+                    input.value = "";
+                    document.getElementById("data").value = ""; 
+                }
+            }
+        });
+
+        removerb.addEventListener("click", () => {
+            const listaItems = ul.getElementsByTagName("li");
+            if (listaItems.length > 0) {
+                const ultimoItem = listaItems[listaItems.length - 1];
+                ul.removeChild(ultimoItem);
+            }
+        });
     </script>
 </body>
+
 </html>
