@@ -9,6 +9,8 @@
     <style>
         body{
             font-family: Arial, Helvetica, sans-serif;
+            background: rgb(79, 105, 221);
+            background: radial-gradient(circle, rgb(79, 197, 177) 0%, rgba(148,187,233,1) 100%);
         }
         div{
             justify-content: center;
@@ -75,7 +77,7 @@
         let li = []
 
         button.addEventListener('click', () => {
-            texto.textContent = "Botao funcionando!!"
+            texto.textContent = "Comece a inserir a data na lista"
         });
 
         titulo.addEventListener("mouseover", () => {
@@ -113,10 +115,18 @@
 
         removerb.addEventListener("click", () => {
             const listaItems = ul.getElementsByTagName("li");
-            if (listaItems.length > 0) {
-                const ultimoItem = listaItems[listaItems.length - 1];
-                ul.removeChild(ultimoItem);
+          const itensRemover = [];
+          for(let i = 0; i < listaItems.length; i++){
+            const item = listaItems[i];
+            const checkbox = item.querySelector("input[type='checkbox']"); 
+
+            if(checkbox.checked){
+                itensRemover.push(item); 
             }
+          }
+          itensRemover.forEach(item => {
+            ul.removeChild(item);
+          });
         });
     </script>
 </body>
